@@ -18,6 +18,7 @@ import "@babylonjs/core/Debug/debugLayer";
 import ProcMesh from "./geo/ProcMesh";
 import { Tools, ToolBase } from "./tools/ToolBase";
 import { ToolManager } from "./tools/ToolManager";
+import { Controls } from "./controls/controls";
 
 const slabPoints: Vector3[] = [];
 const markers: Mesh[] = [];
@@ -25,20 +26,24 @@ const markers: Mesh[] = [];
 const tools: ToolBase[] = [];
 const activeTool: ToolBase | null = null;
 
-const toolManger = new ToolManager();
+let toolManger: ToolManager | null = null;
 
 class App {
+  private _toolManager: ToolManager;
+  private _controls: Controls;
+
   constructor() {
+    this._controls = new Controls();
+
     const canvas = document.createElement("canvas");
-    canvas.style.width = "100%";
+    canvas.style.width = "75%";
     canvas.style.height = "100%";
     document.body.appendChild(canvas);
 
     // init babylon engine
     const engine = new Engine(canvas, true);
     const scene = new Scene(engine);
-
-    toolManger.init(scene);
+    this._toolManager = new ToolManager(scene);
 
     const camera: ArcRotateCamera = new ArcRotateCamera(
       "Camera",
@@ -78,13 +83,6 @@ class App {
           scene.debugLayer.hide();
         } else {
           scene.debugLayer.show();
-        }
-      }
-      if (event.key === "r" || event.key === "R") {
-        if (slabPoints.length > 3) {
-          procMesh.updatePoints(slabPoints);
-          // procMesh.geo.position.y = procMesh.yPos;
-          slabPoints.length = 0;
         }
       }
     });

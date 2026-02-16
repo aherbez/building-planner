@@ -12,9 +12,9 @@ export class ToolBase {
 
   deactivate() {}
 
-  onPointerDown() {}
+  onPointerDown(event: PointerEvent) {}
 
-  onPointerUp() {}
+  onPointerUp(event: PointerEvent) {}
 
-  onPointerMove() {}
+  onPointerMove(event: PointerEvent) {}
 }
