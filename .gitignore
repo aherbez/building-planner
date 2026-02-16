@@ -1,4 +1,5 @@
 node_modules
+dist
 notes/notes.md
 todo.md
 assets_srcs.md
