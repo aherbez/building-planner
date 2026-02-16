@@ -2,6 +2,7 @@
   "devDependencies": {
     "@babylonjs/core": "^8.50.5",
     "@babylonjs/inspector": "^8.50.5",
+    "copy-webpack-plugin": "^13.0.1",
     "html-webpack-plugin": "^5.6.6",
     "ts-loader": "^9.5.4",
     "typescript": "^5.9.3",
