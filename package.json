@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "@babylonjs/core": "^8.50.5",
+    "@babylonjs/inspector": "^8.50.5",
+    "html-webpack-plugin": "^5.6.6",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "webpack": "^5.105.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.3"
+  },
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --port 8080"
+  },
+  "dependencies": {
+    "earcut": "^3.0.2"
+  }
+}
