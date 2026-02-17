@@ -77,4 +77,14 @@ export class PlacementTool extends ToolBase {
       }
     }
   }
+
+  onBackspace(): void {
+    if (this._targetPoints.length > 0) {
+      this._targetPoints.pop();
+      const marker = this._markers.pop();
+      if (marker) {
+        marker.dispose();
+      }
+    }
+  }
 }

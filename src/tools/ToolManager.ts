@@ -38,6 +38,9 @@ export class ToolManager {
       if (event.key === "w") {
         this.setTool(Tools.Wall);
       }
+      if (event.key === "Backspace" || event.key === "Delete") {
+        this.activeTool?.onBackspace();
+      }
       if (event.key === "Enter") {
         this.activeTool.finializeTool();
       }
