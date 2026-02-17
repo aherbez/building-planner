@@ -35,7 +35,7 @@ Finally got some time to get back to the test
 
 7:00-8:30pm: Dinner
 
-9:14: Added
+9:14pm: Added
 
 - parent class for tools that need to place things (PlacementTool)
 - cursors that update as the user moves the mouse (implemented in PlacementTool)
@@ -43,7 +43,9 @@ Finally got some time to get back to the test
 - made MakeSlab only work on terrain, MakeWall only work on slabs
 
 ![wall_tool.jpg](/notes/images/wall_tool.jpg)
-10:19:
+10:19pm:
 
 - wall tool now adds walls
 - added brick texture to material library
+
+10:25pm: Added ability to remove recently-placed markers with either the Backspace or Delete keys. Works with both slab and wall creation
