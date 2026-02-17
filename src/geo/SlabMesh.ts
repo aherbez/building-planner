@@ -4,6 +4,7 @@ import { MaterialLibrary, MaterialNames } from "./MaterialLibrary";
 import { cleanPoints } from "./utils";
 
 const SLAB_THICKNESS = 0.5;
+const COLUMN_DIAMETER = 1.0;
 
 export default class SlabMesh {
   private _points: BABYLON.Vector3[];
@@ -12,16 +13,12 @@ export default class SlabMesh {
   private _scene: BABYLON.Scene;
   private _mat: BABYLON.StandardMaterial;
   private _yPos: number;
+  private _columns: BABYLON.Mesh[] = [];
+  private _center: BABYLON.Vector3;
 
   constructor(scene: BABYLON.Scene) {
     this._scene = scene;
     this._yPos = 0;
-    this._points = [
-      new BABYLON.Vector3(0, 0, 0),
-      new BABYLON.Vector3(1, 0, 0),
-      new BABYLON.Vector3(1, 0, 1),
-      new BABYLON.Vector3(0, 0, 1),
-    ];
 
     this._uvs = [
       new BABYLON.Vector4(0, 0, 2, 2), // top face
@@ -30,8 +27,6 @@ export default class SlabMesh {
     ];
 
     this._mat = MaterialLibrary.getMaterial(MaterialNames.Concrete);
-
-    this._generateMesh();
   }
 
   private _cleanPoints() {
@@ -44,22 +39,28 @@ export default class SlabMesh {
       this._mesh.dispose();
     }
 
-    this._points = points;
-    this._cleanPoints();
-    console.log("updating points");
-    console.group();
-    this._points.forEach((p) => console.log(p));
-    console.groupEnd();
+    this._columns.forEach((col) => col.dispose());
+    this._columns = [];
 
-    console.log(this._points);
+    this._points = points;
+    this._center = this._points
+      .reduce((acc, p) => acc.add(p), new BABYLON.Vector3(0, 0, 0))
+      .scale(1 / this._points.length);
+
+    this._cleanPoints();
     this._generateMesh();
+    this._addColumns();
   }
 
   private _generateMesh() {
+    const zeroYPoints = this._points.map(
+      (p) => new BABYLON.Vector3(p.x, 0, p.z),
+    );
+
     this._mesh = BABYLON.MeshBuilder.ExtrudePolygon(
       "polygon",
       {
-        shape: this._points,
+        shape: zeroYPoints,
         depth: 1,
         faceUV: this._uvs,
       },
@@ -68,6 +69,30 @@ export default class SlabMesh {
     );
     this._mesh.material = this._mat;
     this._mesh.position.y = this._yPos;
+  }
+
+  private _addColumns() {
+    this._points.forEach((point, idx) => {
+      const colHeight = this._yPos - point.y;
+      const offset = this._center.subtract(point);
+      offset._y = 0;
+      offset.normalize().scale(COLUMN_DIAMETER * 0.7);
+
+      const column = BABYLON.MeshBuilder.CreateCylinder(
+        `column_${idx}`,
+        { diameter: 1, height: colHeight - 0.1 },
+        this._scene,
+      );
+      column.position = new BABYLON.Vector3(
+        point.x + offset.x,
+        point.y + colHeight / 2,
+        point.z + offset.z,
+      );
+      column.material = MaterialLibrary.getMaterial(
+        MaterialNames.ConcreteSmooth,
+      );
+      this._columns.push(column);
+    });
   }
 
   public get yPos(): number {

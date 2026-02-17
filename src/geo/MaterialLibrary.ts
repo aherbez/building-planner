@@ -2,6 +2,7 @@ import * as BABYLON from "@babylonjs/core";
 
 export enum MaterialNames {
   Concrete = "concrete",
+  ConcreteSmooth = "concrete_smooth",
   Marker = "marker",
 }
 

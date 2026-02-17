@@ -1,21 +1,6 @@
 import { Vector3 } from "@babylonjs/core";
 
 export const cleanPoints = (points: Vector3[]): void => {
-  let maxY = -Infinity;
-  let minY = Infinity;
-  points.forEach((p) => {
-    if (p.y > maxY) {
-      maxY = p.y;
-    }
-    if (p.y < minY) {
-      minY = p.y;
-    }
-  });
-
-  points.forEach((p) => {
-    p.y = 0;
-  });
-
   // Sort points into counter-clockwise order around the centroid in the XZ plane
   const cx = points.reduce((sum, p) => sum + p.x, 0) / points.length;
   const cz = points.reduce((sum, p) => sum + p.z, 0) / points.length;
@@ -34,5 +19,4 @@ export const cleanPoints = (points: Vector3[]): void => {
   if (signedArea > 0) {
     points.reverse();
   }
-  // return points;
 };

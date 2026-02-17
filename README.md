@@ -29,3 +29,6 @@ Finally got some time to get back to the test
 5:59pm: Setting up MaterialLibrary, stubbing out utils in /geo/
 
 6:30: Setting up concrete and default marker materials
+
+![supports.png](/notes/images/supports.png)
+7:00pm: Adding generation of columns underneath the slab (also fixed bug with floating slabs)
