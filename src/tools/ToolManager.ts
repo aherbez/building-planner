@@ -1,7 +1,9 @@
 import { Tools, ToolBase, ToolNames } from "./ToolBase";
 import { MakeSlabTool } from "./MakeSlabTool";
+import { MakeWallTool } from "./MakeWallTool";
 import { Scene } from "@babylonjs/core/scene";
 import { SelectTool } from "./SelectTool";
+
 import * as BABYLON from "@babylonjs/core/";
 
 export enum ToolEvents {
@@ -22,14 +24,9 @@ export class ToolManager {
     this._tools = new Map<Tools, ToolBase>();
     this._tools.set(Tools.Slab, new MakeSlabTool(this));
     this._tools.set(Tools.Select, new SelectTool(this));
+    this._tools.set(Tools.Wall, new MakeWallTool(this));
 
     this.setTool(Tools.Select);
-
-    window.addEventListener("pointerdown", (event) => {
-      if (this.activeTool) {
-        this.activeTool.onPointerDown(event);
-      }
-    });
 
     window.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
@@ -38,14 +35,31 @@ export class ToolManager {
       if (event.key === "s") {
         this.setTool(Tools.Slab);
       }
+      if (event.key === "w") {
+        this.setTool(Tools.Wall);
+      }
       if (event.key === "Enter") {
         this.activeTool.finializeTool();
       }
     });
 
-    this._scene.onPointerDown = (evt, pickInfo) => {
-      this.activeTool?.onPickEvent(evt, pickInfo);
-    };
+    this._scene.onPointerObservable.add((pointerInfo) => {
+      switch (pointerInfo.type) {
+        case BABYLON.PointerEventTypes.POINTERDOWN:
+          this.activeTool?.onPickEvent(pointerInfo, pointerInfo.pickInfo);
+          break;
+        case BABYLON.PointerEventTypes.POINTERUP:
+          this.activeTool?.onPointerUp(pointerInfo);
+          break;
+        case BABYLON.PointerEventTypes.POINTERMOVE:
+          const pickResult = this._scene.pick(
+            this._scene.pointerX,
+            this._scene.pointerY,
+          );
+          this.activeTool?.onPointerMove(pointerInfo, pickResult);
+          break;
+      }
+    });
   }
 
   public replaceSelection(objects: BABYLON.Mesh[]) {
@@ -83,10 +97,11 @@ export class ToolManager {
     }
 
     if (this.activeTool) {
-      this.activeTool.deactivate();
+      this.activeTool.onDeactivate();
     }
 
     const previousTool = this._toolStack.pop();
+
     this.activateTool(this.activeTool);
   }
 
@@ -103,12 +118,12 @@ export class ToolManager {
     }
 
     if (this.activeTool) {
-      this.activeTool.deactivate();
+      this.activeTool.onDeactivate();
     }
     this._toolStack.push(tool);
     // this.activeTool = tool;
     if (this.activeTool) {
-      this.activeTool.activate();
+      this.activeTool.onActivate();
     }
 
     // emit tool changed event

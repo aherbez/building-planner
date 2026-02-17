@@ -16,6 +16,11 @@ export default class SlabMesh {
   private _columns: BABYLON.Mesh[] = [];
   private _center: BABYLON.Vector3;
 
+  static readonly objMetadata = {
+    type: "slab",
+    isTerrain: false,
+  };
+
   constructor(scene: BABYLON.Scene) {
     this._scene = scene;
     this._yPos = 0;
@@ -69,6 +74,7 @@ export default class SlabMesh {
     );
     this._mesh.material = this._mat;
     this._mesh.position.y = this._yPos;
+    this._mesh.metadata = SlabMesh.objMetadata;
   }
 
   private _addColumns() {
@@ -91,6 +97,7 @@ export default class SlabMesh {
       column.material = MaterialLibrary.getMaterial(
         MaterialNames.ConcreteSmooth,
       );
+      column.metadata = SlabMesh.objMetadata;
       this._columns.push(column);
     });
   }

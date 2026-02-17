@@ -3,7 +3,7 @@ import "@babylonjs/inspector";
 import "@babylonjs/loaders/glTF/2.0";
 import "@babylonjs/core/Debug/debugLayer";
 import { ToolManager } from "./tools/ToolManager";
-import { Controls } from "./controls/controls";
+import { Controls } from "./controls/Controls";
 import { MaterialLibrary, MaterialNames } from "./geo/MaterialLibrary";
 import { SceneManager } from "./SceneManager";
 
@@ -86,6 +86,11 @@ class App {
 
   private loadModels = async (scene: BABYLON.Scene) => {
     const model = await BABYLON.ImportMeshAsync("/models/hills_v2.glb", scene);
+    model.meshes.forEach((mesh) => {
+      mesh.metadata = {
+        isTerrain: true,
+      };
+    });
     console.log(model);
   };
 
@@ -96,6 +101,11 @@ class App {
     });
 
     MaterialLibrary.createAndRegisterMaterial(MaterialNames.Marker, {
+      diffuseColor: new BABYLON.Color3(1, 1, 0),
+      emissiveColor: new BABYLON.Color3(1, 1, 0),
+    });
+
+    MaterialLibrary.createAndRegisterMaterial(MaterialNames.Cursor, {
       diffuseColor: new BABYLON.Color3(1, 0, 0),
       emissiveColor: new BABYLON.Color3(1, 0, 0),
     });

@@ -1,16 +1,19 @@
 import { IPointerEvent } from "@babylonjs/core/Events/deviceInputEvents";
 import { ToolManager } from "./ToolManager";
+import { PointerInfo } from "@babylonjs/core/Events/pointerEvents";
 
 export enum Tools {
   None,
   Select,
   Slab,
+  Wall,
 }
 
 export const ToolNames = {
   [Tools.None]: "None",
   [Tools.Select]: "Select",
   [Tools.Slab]: "Create Slab",
+  [Tools.Wall]: "Create Wall",
 };
 
 export class ToolBase {
@@ -21,17 +24,16 @@ export class ToolBase {
     this._toolManager = toolManager;
   }
 
-  activate() {}
+  onActivate() {}
 
-  deactivate() {}
+  onDeactivate() {}
 
-  onPointerDown(event: PointerEvent) {}
+  onPointerDown(event: PointerInfo) {}
 
-  onPointerUp(event: PointerEvent) {}
+  onPointerUp(event: PointerInfo) {}
 
-  onPointerMove(event: PointerEvent) {}
-
-  onPickEvent(event: IPointerEvent, pickInfo: any) {}
+  onPointerMove(event: PointerInfo, pickInfo: any) {}
+  onPickEvent(event: PointerInfo, pickInfo: any) {}
 
   finializeTool() {}
 }

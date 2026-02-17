@@ -1,3 +1,4 @@
+import { PointerInfo } from "@babylonjs/core";
 import { Tools, ToolBase } from "./ToolBase";
 import { ToolManager } from "./ToolManager";
 
@@ -16,11 +17,11 @@ export class SelectTool extends ToolBase {
     console.log("select tool deactivated");
   }
 
-  onPointerDown(event: PointerEvent) {
+  onPointerDown(event: PointerInfo) {
     console.log("pointer down - SELECT");
   }
 
-  onPointerUp(event: PointerEvent) {
+  onPointerUp(event: PointerInfo) {
     console.log("pointer up");
   }
 }

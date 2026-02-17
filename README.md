@@ -32,3 +32,12 @@ Finally got some time to get back to the test
 
 ![supports.png](/notes/images/supports.png)
 7:00pm: Adding generation of columns underneath the slab (also fixed bug with floating slabs)
+
+7:00-8:30pm: Dinner
+
+9:14: Added
+
+- parent class for tools that need to place things (PlacementTool)
+- cursors that update as the user moves the mouse (implemented in PlacementTool)
+- stubbed out MakeWallTool
+- made MakeSlab only work on terrain, MakeWall only work on slabs

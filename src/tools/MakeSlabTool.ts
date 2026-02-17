@@ -1,41 +1,24 @@
 import { MaterialLibrary, MaterialNames } from "../geo/MaterialLibrary";
 import SlabMesh from "../geo/SlabMesh";
 import { Tools, ToolBase } from "./ToolBase";
-import { ToolManager } from "./ToolManager";
+import { PlacementTool } from "./PlacementTool";
 import * as BABYLON from "@babylonjs/core/";
 
-export class MakeSlabTool extends ToolBase {
+export class MakeSlabTool extends PlacementTool {
   public readonly kind: Tools = Tools.Slab;
 
   private _slabPoints: BABYLON.Vector3[] = [];
-  private _markers: BABYLON.Mesh[] = [];
 
-  constructor(toolManager: ToolManager) {
-    super(toolManager);
+  protected isValidTargetMesh(mesh: BABYLON.AbstractMesh): boolean {
+    return mesh?.metadata?.isTerrain;
   }
 
-  activate() {
-    console.log("make slab tool activated");
-  }
-
-  deactivate() {
-    console.log("make slab tool deactivated");
-  }
-
-  onPointerDown(event: PointerEvent) {
-    console.log("pointer down - CREATE SLAB");
-  }
-
-  onPointerUp(event: PointerEvent) {
-    console.log("pointer up");
-  }
-
-  onPointerMove(event: PointerEvent) {
-    console.log("pointer move");
-  }
-
-  onPickEvent(event: PointerEvent, pickInfo: any): void {
+  onPickEvent(event: BABYLON.PointerInfo, pickInfo: any): void {
     console.log("pick event - CREATE SLAB", event, pickInfo);
+
+    if (!this.isValidTargetMesh(pickInfo?.pickedMesh)) {
+      return;
+    }
 
     if (pickInfo?.hit) {
       //TODO: only add point if it's a terrain mesh
