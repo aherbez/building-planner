@@ -47,7 +47,9 @@ Finally got some time to get back to the test
 
 - wall tool now adds walls
 - added brick texture to material library
+  demo video: [https://www.youtube.com/watch?v=GOx6tvkvvxY](https://www.youtube.com/watch?v=GOx6tvkvvxY)
 
 10:25pm: Added ability to remove recently-placed markers with either the Backspace or Delete keys. Works with both slab and wall creation
 
 10:43pm: Added per-tool instructions to the control panel
+demo video: [https://www.youtube.com/watch?v=G6MWE91BcAs](https://www.youtube.com/watch?v=G6MWE91BcAs)
