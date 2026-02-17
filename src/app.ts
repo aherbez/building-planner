@@ -4,6 +4,7 @@ import "@babylonjs/loaders/glTF/2.0";
 import "@babylonjs/core/Debug/debugLayer";
 import { ToolManager } from "./tools/ToolManager";
 import { Controls } from "./controls/controls";
+import { MaterialLibrary } from "./geo/MaterialLibrary";
 
 class App {
   private _toolManager: ToolManager;
@@ -27,6 +28,7 @@ class App {
 
     this.setupCamera(canvas);
     this.setupLights();
+    this.setupMaterials();
 
     window.addEventListener("keydown", (event) => {
       if (
@@ -84,6 +86,10 @@ class App {
     const model = await BABYLON.ImportMeshAsync("/models/hills_v2.glb", scene);
     console.log(model);
   };
+
+  private setupMaterials() {
+    // MaterialLibrary.registerMaterial("checker", checkerMat);
+  }
 }
 
 new App();

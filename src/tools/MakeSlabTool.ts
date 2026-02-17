@@ -1,4 +1,4 @@
-import ProcMesh from "../geo/ProcMesh";
+import SlabMesh from "../geo/SlabMesh";
 import { Tools, ToolBase } from "./ToolBase";
 import { ToolManager } from "./ToolManager";
 import * as BABYLON from "@babylonjs/core/";
@@ -55,7 +55,7 @@ export class MakeSlabTool extends ToolBase {
   finializeTool() {
     console.log("finalize slab tool", this._slabPoints);
 
-    const slabMesh = new ProcMesh(this._toolManager.mainScene);
+    const slabMesh = new SlabMesh(this._toolManager.mainScene);
     slabMesh.updatePoints(this._slabPoints);
 
     // clear markers and points

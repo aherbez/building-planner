@@ -25,3 +25,5 @@ Finally got some time to get back to the test
 - added a proper ToolManger to push/pop tools
 - added control panel and display of active tool
 - added "Slab tool" to create concrete slabs on top of terrain
+
+5:59pm: Setting up MaterialLibrary, stubbing out utils in /geo/
