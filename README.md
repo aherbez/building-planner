@@ -21,6 +21,7 @@ Finally got some time to get back to the test
 ![create_slab.png](/notes/images/create_slab.png)
 
 - added loading of a terrain GLTF
+- set project up to deploy via netlify
 - added a proper ToolManger to push/pop tools
 - added control panel and display of active tool
 - added "Slab tool" to create concrete slabs on top of terrain
