@@ -6,10 +6,9 @@ import { WallMesh } from "../geo/WallMesh";
 export class MakeWallTool extends PlacementTool {
   public readonly kind: Tools = Tools.Wall;
 
-  private _wallPoints: BABYLON.Vector3[] = [];
-
   isValidTargetMesh(mesh: BABYLON.AbstractMesh): boolean {
-    return mesh?.metadata?.isTerrain === false;
+    const { isTerrain, type } = mesh?.metadata || {};
+    return !isTerrain && type === "slab";
   }
 
   finializeTool(): void {

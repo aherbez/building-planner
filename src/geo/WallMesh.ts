@@ -63,28 +63,8 @@ export class WallMesh {
         earcut,
       );
       wallSegment.material = MaterialLibrary.getMaterial(MaterialNames.Brick);
-      wallSegment.position.y = this._yPos + WALL_HEIGHT / 2;
+      wallSegment.position.y = this._yPos + WALL_HEIGHT;
       wallSegment.metadata = WallMesh.objMetadata;
-
-      /*
-      const wallSegment = BABYLON.MeshBuilder.CreateRibbon(
-        `wallSegment_${i}`,
-        {
-          pathArray: [
-            [pA, pB],
-            [pD, pC],
-          ],
-          closeArray: false,
-          closePath: false,
-          sideOrientation: BABYLON.Mesh.DOUBLESIDE,
-        },
-        SceneManager.mainScene,
-      );
-      wallSegment.material = MaterialLibrary.getMaterial(
-        MaterialNames.Concrete,
-      );
-      wallSegment.position.y = WALL_HEIGHT / 2;
-      */
     }
   }
 }
