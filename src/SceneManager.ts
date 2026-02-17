@@ -12,14 +12,14 @@ export class SceneManager {
     return SceneManager._instance;
   }
 
-  public get mainScene(): BABYLON.Scene {
-    if (!this._scene) {
+  public static get mainScene(): BABYLON.Scene {
+    if (!SceneManager._instance) {
       throw new Error("Scene not initialized");
     }
-    return this._scene;
+    return SceneManager.instance()._scene;
   }
 
-  public set mainScene(scene: BABYLON.Scene) {
-    this._scene = scene;
+  public static set mainScene(scene: BABYLON.Scene) {
+    SceneManager.instance()._scene = scene;
   }
 }

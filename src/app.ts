@@ -21,7 +21,7 @@ class App {
     // init babylon engine
     const engine = new BABYLON.Engine(canvas, true);
     this._scene = new BABYLON.Scene(engine);
-    SceneManager.instance().mainScene = this._scene;
+    SceneManager.mainScene = this._scene;
     this._toolManager = new ToolManager(this._scene);
 
     this._controls = new Controls({

@@ -2,6 +2,7 @@ import * as BABYLON from "@babylonjs/core";
 import earcut from "earcut";
 import { MaterialLibrary, MaterialNames } from "./MaterialLibrary";
 import { cleanPoints } from "./utils";
+import { SceneManager } from "../SceneManager";
 
 const SLAB_THICKNESS = 0.5;
 const COLUMN_DIAMETER = 1.0;
@@ -21,8 +22,9 @@ export default class SlabMesh {
     isTerrain: false,
   };
 
-  constructor(scene: BABYLON.Scene) {
-    this._scene = scene;
+  constructor() {
+    // this._scene = scene;
+    this._scene = SceneManager.mainScene;
     this._yPos = 0;
 
     this._uvs = [

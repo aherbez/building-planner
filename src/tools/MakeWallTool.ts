@@ -8,12 +8,11 @@ export class MakeWallTool extends PlacementTool {
 
   private _wallPoints: BABYLON.Vector3[] = [];
 
-  protected isValidTargetMesh(mesh: BABYLON.AbstractMesh): boolean {
-    console.log(mesh?.metadata);
+  isValidTargetMesh(mesh: BABYLON.AbstractMesh): boolean {
     return mesh?.metadata?.isTerrain === false;
   }
 
-  onPickEvent(event: BABYLON.PointerInfo, pickInfo: any): void {
-    console.log("pick event - CREATE WALL", event, pickInfo);
+  finializeTool(): void {
+    console.log("finalize wall tool", this._targetPoints);
   }
 }
