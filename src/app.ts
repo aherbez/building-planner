@@ -4,7 +4,8 @@ import "@babylonjs/loaders/glTF/2.0";
 import "@babylonjs/core/Debug/debugLayer";
 import { ToolManager } from "./tools/ToolManager";
 import { Controls } from "./controls/controls";
-import { MaterialLibrary } from "./geo/MaterialLibrary";
+import { MaterialLibrary, MaterialNames } from "./geo/MaterialLibrary";
+import { SceneManager } from "./SceneManager";
 
 class App {
   private _toolManager: ToolManager;
@@ -20,6 +21,7 @@ class App {
     // init babylon engine
     const engine = new BABYLON.Engine(canvas, true);
     this._scene = new BABYLON.Scene(engine);
+    SceneManager.instance().mainScene = this._scene;
     this._toolManager = new ToolManager(this._scene);
 
     this._controls = new Controls({
@@ -88,7 +90,15 @@ class App {
   };
 
   private setupMaterials() {
-    // MaterialLibrary.registerMaterial("checker", checkerMat);
+    MaterialLibrary.createAndRegisterMaterial(MaterialNames.Concrete, {
+      diffuseTexture: "/textures/concrete.jpg",
+      // normalTexture: "/textures/concrete_normal.jpg",
+    });
+
+    MaterialLibrary.createAndRegisterMaterial(MaterialNames.Marker, {
+      diffuseColor: new BABYLON.Color3(1, 0, 0),
+      emissiveColor: new BABYLON.Color3(1, 0, 0),
+    });
   }
 }
 

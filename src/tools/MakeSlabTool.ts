@@ -1,3 +1,4 @@
+import { MaterialLibrary, MaterialNames } from "../geo/MaterialLibrary";
 import SlabMesh from "../geo/SlabMesh";
 import { Tools, ToolBase } from "./ToolBase";
 import { ToolManager } from "./ToolManager";
@@ -44,9 +45,10 @@ export class MakeSlabTool extends ToolBase {
 
       const marker = BABYLON.MeshBuilder.CreateBox(
         "marker",
-        { size: 0.1, height: 50 },
+        { size: 0.2, height: 50 },
         this._toolManager.mainScene,
       );
+      marker.material = MaterialLibrary.getMaterial(MaterialNames.Marker);
       marker.position = new BABYLON.Vector3(point.x, point.y + 25, point.z);
       this._markers.push(marker);
     }

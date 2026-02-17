@@ -2,6 +2,15 @@ import * as BABYLON from "@babylonjs/core";
 
 export enum MaterialNames {
   Concrete = "concrete",
+  Marker = "marker",
+}
+
+export interface MaterialOptions {
+  diffuseTexture?: string;
+  diffuseColor?: BABYLON.Color3;
+  specularColor?: BABYLON.Color3;
+  emissiveColor?: BABYLON.Color3;
+  ambientColor?: BABYLON.Color3;
 }
 
 export class MaterialLibrary {
@@ -30,6 +39,31 @@ export class MaterialLibrary {
       MaterialLibrary.instance()._materials.get(name) ||
       MaterialLibrary.instance()._defaultMaterial
     );
+  }
+
+  public static createAndRegisterMaterial(
+    name: string,
+    options: MaterialOptions,
+  ): void {
+    const mat = new BABYLON.StandardMaterial(name, null);
+
+    if (options.diffuseTexture) {
+      mat.diffuseTexture = new BABYLON.Texture(options.diffuseTexture, null);
+    }
+    if (options.diffuseColor) {
+      mat.diffuseColor = options.diffuseColor ?? new BABYLON.Color3(1, 1, 1);
+    }
+    if (options.specularColor) {
+      mat.specularColor = options.specularColor ?? new BABYLON.Color3(0, 0, 0);
+    }
+    if (options.emissiveColor) {
+      mat.emissiveColor = options.emissiveColor ?? new BABYLON.Color3(0, 0, 0);
+    }
+    if (options.ambientColor) {
+      mat.ambientColor = options.ambientColor ?? new BABYLON.Color3(0, 0, 0);
+    }
+
+    MaterialLibrary.registerMaterial(name, mat);
   }
 
   public static registerMaterial(
