@@ -7,6 +7,8 @@ export class SelectTool extends ToolBase {
 
   constructor(toolManager: ToolManager) {
     super(toolManager);
+
+    this._instructions = ['Use "s" to create slabs', 'Use "w" to create walls'];
   }
 
   activate() {

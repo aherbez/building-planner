@@ -7,7 +7,15 @@ import * as BABYLON from "@babylonjs/core/";
 export class MakeSlabTool extends PlacementTool {
   public readonly kind: Tools = Tools.Slab;
 
-  // private _slabPoints: BABYLON.Vector3[] = [];
+  constructor(toolManager: any) {
+    super(toolManager);
+
+    this._instructions = [
+      "Click to place slab vertices",
+      "Press backspace to undo last vertex",
+      "Press enter to finalize slab",
+    ];
+  }
 
   protected isValidTargetMesh(mesh: BABYLON.AbstractMesh): boolean {
     return mesh?.metadata?.isTerrain;

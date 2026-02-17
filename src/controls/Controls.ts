@@ -7,6 +7,7 @@ type ControlsOptions = {
 export class Controls {
   private _toolManger: ToolManager;
   private _toolDisplayDiv: HTMLDivElement;
+  private _toolInstructionsDiv: HTMLDivElement;
 
   constructor(options: ControlsOptions) {
     this._toolManger = options.toolManager;
@@ -27,12 +28,33 @@ export class Controls {
     this._toolDisplayDiv.innerHTML = `<p>Active Tool: ${this._toolManger.activeToolName}</p>`;
     controlsDiv.appendChild(this._toolDisplayDiv);
 
+    this._toolInstructionsDiv = document.createElement("div");
+    this._toolInstructionsDiv.style.padding = "5px";
+    this._toolInstructionsDiv.style.marginTop = "20px";
+
+    controlsDiv.appendChild(this._toolInstructionsDiv);
+
+    this.updateActiveToolDisplay();
+    this.updateToolInstructions();
+
     window.addEventListener(ToolEvents.ToolChanged, () => {
       this.updateActiveToolDisplay();
+      this.updateToolInstructions();
     });
   }
 
   private updateActiveToolDisplay() {
     this._toolDisplayDiv.innerHTML = `<p>Active Tool: ${this._toolManger.activeToolName}</p>`;
+  }
+
+  private updateToolInstructions() {
+    const instructions = this._toolManger.activeTool?.instructions || [];
+    if (instructions.length === 0) {
+      this._toolInstructionsDiv.innerHTML = "";
+    } else {
+      this._toolInstructionsDiv.innerHTML =
+        "<p>Instructions:</p>" +
+        instructions.map((inst) => `<p>${inst}</p>`).join("");
+    }
   }
 }

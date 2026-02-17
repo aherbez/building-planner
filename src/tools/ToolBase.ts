@@ -19,9 +19,14 @@ export const ToolNames = {
 export class ToolBase {
   public readonly kind: Tools = Tools.None;
   protected _toolManager: ToolManager | null = null;
+  protected _instructions: string[] = [];
 
   constructor(toolManager: ToolManager) {
     this._toolManager = toolManager;
+  }
+
+  public get instructions(): string[] {
+    return this._instructions;
   }
 
   onActivate() {}

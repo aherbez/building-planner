@@ -10,3 +10,7 @@ body {
   height: 100%;
   overflow: hidden;
 }
+
+p {
+  margin: 5px 0;
+}

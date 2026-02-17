@@ -112,6 +112,10 @@ export class ToolManager {
     const tool = this._tools.get(toolKind);
     if (tool) {
       this.activateTool(tool);
+      // emit tool changed event
+      window.dispatchEvent(
+        new CustomEvent(ToolEvents.ToolChanged, { detail: { toolKind } }),
+      );
     }
   }
 
