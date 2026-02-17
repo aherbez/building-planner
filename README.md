@@ -49,3 +49,5 @@ Finally got some time to get back to the test
 - added brick texture to material library
 
 10:25pm: Added ability to remove recently-placed markers with either the Backspace or Delete keys. Works with both slab and wall creation
+
+10:43pm: Added per-tool instructions to the control panel
