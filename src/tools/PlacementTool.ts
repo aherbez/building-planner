@@ -28,8 +28,6 @@ export class PlacementTool extends ToolBase {
   }
 
   onPickEvent(event: BABYLON.PointerInfo, pickInfo: any): void {
-    console.log("pick event - CREATE SLAB", event, pickInfo);
-
     if (!this.isValidTargetMesh(pickInfo?.pickedMesh)) {
       return;
     }
