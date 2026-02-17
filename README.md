@@ -41,3 +41,9 @@ Finally got some time to get back to the test
 - cursors that update as the user moves the mouse (implemented in PlacementTool)
 - stubbed out MakeWallTool
 - made MakeSlab only work on terrain, MakeWall only work on slabs
+
+![wall_tool.jpg](/notes/images/wall_tool.jpg)
+10:19:
+
+- wall tool now adds walls
+- added brick texture to material library

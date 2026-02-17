@@ -33,7 +33,10 @@ export class ToolBase {
   onPointerUp(event: PointerInfo) {}
 
   onPointerMove(event: PointerInfo, pickInfo: any) {}
+
   onPickEvent(event: PointerInfo, pickInfo: any) {}
 
   finializeTool() {}
+
+  onBackspace() {}
 }
