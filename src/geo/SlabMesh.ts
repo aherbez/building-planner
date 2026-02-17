@@ -22,8 +22,7 @@ export default class SlabMesh {
     isTerrain: false,
   };
 
-  constructor() {
-    // this._scene = scene;
+  constructor(points: BABYLON.Vector3[]) {
     this._scene = SceneManager.mainScene;
     this._yPos = 0;
 
@@ -34,6 +33,8 @@ export default class SlabMesh {
     ];
 
     this._mat = MaterialLibrary.getMaterial(MaterialNames.Concrete);
+
+    this.updatePoints(points);
   }
 
   private _cleanPoints() {
@@ -71,7 +72,7 @@ export default class SlabMesh {
         depth: 1,
         faceUV: this._uvs,
       },
-      this._scene,
+      SceneManager.mainScene,
       earcut,
     );
     this._mesh.material = this._mat;

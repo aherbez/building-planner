@@ -109,6 +109,10 @@ class App {
       diffuseColor: new BABYLON.Color3(1, 0, 0),
       emissiveColor: new BABYLON.Color3(1, 0, 0),
     });
+
+    MaterialLibrary.createAndRegisterMaterial(MaterialNames.Brick, {
+      diffuseTexture: "/textures/brick_bright_red.jpg",
+    });
   }
 }
 

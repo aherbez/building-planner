@@ -1,7 +1,7 @@
 import * as BABYLON from "@babylonjs/core";
-import { Tools, ToolBase } from "./ToolBase";
+import { Tools } from "./ToolBase";
 import { PlacementTool } from "./PlacementTool";
-import { ToolManager } from "./ToolManager";
+import { WallMesh } from "../geo/WallMesh";
 
 export class MakeWallTool extends PlacementTool {
   public readonly kind: Tools = Tools.Wall;
@@ -13,6 +13,7 @@ export class MakeWallTool extends PlacementTool {
   }
 
   finializeTool(): void {
-    console.log("finalize wall tool", this._targetPoints);
+    const walls = new WallMesh(this._targetPoints);
+    this._toolManager.popTool();
   }
 }

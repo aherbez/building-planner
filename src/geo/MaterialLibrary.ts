@@ -5,6 +5,7 @@ export enum MaterialNames {
   ConcreteSmooth = "concrete_smooth",
   Marker = "marker",
   Cursor = "cursor",
+  Brick = "brick",
 }
 
 export interface MaterialOptions {
