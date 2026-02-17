@@ -13,4 +13,14 @@
 ![skull.png](/notes/images/skull.png)
 Basic loading of a glb (sourced from Polycam)
 
+## 2026-02-16
 
+Finally got some time to get back to the test
+
+4:45pm: lots of changes:
+![create_slab.png](/notes/images/create_slab.png)
+
+- added loading of a terrain GLTF
+- added a proper ToolManger to push/pop tools
+- added control panel and display of active tool
+- added "Slab tool" to create concrete slabs on top of terrain
