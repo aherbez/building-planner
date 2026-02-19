@@ -6,11 +6,13 @@ import { ToolManager } from "./tools/ToolManager";
 import { Controls } from "./controls/Controls";
 import { MaterialLibrary, MaterialNames } from "./geo/MaterialLibrary";
 import { SceneManager } from "./SceneManager";
+import { Terrain } from "./terrain/Terrain";
 
 class App {
   private _toolManager: ToolManager;
   private _controls: Controls;
   private _scene: BABYLON.Scene;
+  private _terrain: Terrain;
 
   constructor() {
     const canvas = document.createElement("canvas");
@@ -22,6 +24,7 @@ class App {
     const engine = new BABYLON.Engine(canvas, true);
     this._scene = new BABYLON.Scene(engine);
     SceneManager.mainScene = this._scene;
+    this._terrain = new Terrain();
     this._toolManager = new ToolManager(this._scene);
 
     this._controls = new Controls({
@@ -47,7 +50,7 @@ class App {
       }
     });
 
-    this.loadModels(this._scene);
+    // this.loadModels(this._scene);
 
     window.addEventListener("resize", () => {
       engine.resize();

@@ -53,3 +53,19 @@ Finally got some time to get back to the test
 
 10:43pm: Added per-tool instructions to the control panel
 demo video: [https://www.youtube.com/watch?v=G6MWE91BcAs](https://www.youtube.com/watch?v=G6MWE91BcAs)
+
+# 2026-02-17
+
+4:30pm: back at it, working on sourcing some large / heavy terrain models
+
+![mountain_start.jpg](/notes/images/mountain_start.jpg)
+4:50: have a massive mountain scan from TerraXL. Brought their LOD0 model into Blender and exported it (with 8k textures) as a glb to get a reference point. GLB size: 697MB (huge!)
+
+5:20: Sanity check of heavily decimating the original mesh and exporting for a 13MB glb.
+
+6:00-7:45: Dinner and family obligations
+
+8:30-9:30: Writing a Blender script to slice the model into chunks in an 8x16 grid. Also had to actually let the script run to save out the 128 models.
+
+9:30-10:00: Setting up the project to load in all the chunks asyncronously
+[https://www.youtube.com/watch?v=dPKxEfyklqk](https://www.youtube.com/watch?v=dPKxEfyklqk)
