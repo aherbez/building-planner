@@ -23,13 +23,13 @@ class App {
     // init babylon engine
     const engine = new BABYLON.Engine(canvas, true);
     this._scene = new BABYLON.Scene(engine);
-    SceneManager.mainScene = this._scene;
-    this._terrain = new Terrain();
     this._toolManager = new ToolManager(this._scene);
+    SceneManager.mainScene = this._scene;
+    SceneManager.engine = engine;
+    SceneManager.toolManager = this._toolManager;
+    SceneManager.controls = new Controls();
 
-    this._controls = new Controls({
-      toolManager: this._toolManager,
-    });
+    this._terrain = new Terrain();
 
     this.setupCamera(canvas);
     this.setupLights();
@@ -58,6 +58,7 @@ class App {
 
     engine.runRenderLoop(() => {
       this._scene.render();
+      SceneManager.controls.updatePerformanceDisplay(engine.getFps());
     });
   }
 
@@ -80,11 +81,13 @@ class App {
       new BABYLON.Vector3(1, 1, 0),
       this._scene,
     );
+    light1.intensity = 0.2;
     const light2: BABYLON.DirectionalLight = new BABYLON.DirectionalLight(
       "light2",
       new BABYLON.Vector3(-1, -2, -1),
       this._scene,
     );
+    light2.intensity = 2;
   }
 
   private loadModels = async (scene: BABYLON.Scene) => {
@@ -115,6 +118,11 @@ class App {
 
     MaterialLibrary.createAndRegisterMaterial(MaterialNames.Brick, {
       diffuseTexture: "/textures/brick_bright_red.jpg",
+    });
+
+    MaterialLibrary.createAndRegisterPBRMaterial(MaterialNames.Bluffs, {
+      albedoTexture: "/textures/bluffs/albedo_4K.jpg",
+      reflectivityTexture: "/textures/bluffs/specular_4K.jpg",
     });
   }
 }

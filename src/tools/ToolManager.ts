@@ -5,6 +5,7 @@ import { Scene } from "@babylonjs/core/scene";
 import { SelectTool } from "./SelectTool";
 
 import * as BABYLON from "@babylonjs/core/";
+import { SceneManager } from "../SceneManager";
 
 export enum ToolEvents {
   ToolActivated = "toolActivated",

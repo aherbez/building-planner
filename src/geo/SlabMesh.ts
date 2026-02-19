@@ -32,7 +32,9 @@ export default class SlabMesh {
       new BABYLON.Vector4(0, 0, 1, 1), // bottom face
     ];
 
-    this._mat = MaterialLibrary.getMaterial(MaterialNames.Concrete);
+    this._mat = MaterialLibrary.getMaterial(
+      MaterialNames.Concrete,
+    ) as BABYLON.StandardMaterial;
 
     this.updatePoints(points);
   }
