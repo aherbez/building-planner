@@ -9,7 +9,22 @@ const CLOUDFLARE_BUCKET_URL =
 
 export class Terrain {
   constructor() {
-    this.loadModels(SceneManager.mainScene);
+    // load chunks from the center outwards
+    const centerX = 3;
+    const centerZ = 7;
+
+    const loadOrder: { x: number; z: number; distance: number }[] = [];
+    for (let x = 0; x < 8; x++) {
+      for (let z = 0; z < 16; z++) {
+        const distance = (x - centerX) ** 2 + (z - centerZ) ** 2;
+        loadOrder.push({ x, z, distance });
+      }
+    }
+    loadOrder.sort((a, b) => a.distance - b.distance);
+
+    loadOrder.forEach(({ x, z }) => {
+      this.loadTestChunk(SceneManager.mainScene, x, z);
+    });
   }
 
   private loadTestChunk = async (

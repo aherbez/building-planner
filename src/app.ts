@@ -69,7 +69,7 @@ class App {
       -Math.PI / 2,
       Math.PI / 4,
       10,
-      new BABYLON.Vector3(0, 65, 0),
+      new BABYLON.Vector3(25, 65, 0),
       this._scene,
     );
     camera.minZ = 0.01;
