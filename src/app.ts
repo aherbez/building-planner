@@ -1,3 +1,6 @@
+import "@babylonjs/core/Engines/Extensions/engine.textureSelector";
+import "@babylonjs/core/Materials/Textures/Loaders/ktxTextureLoader";
+
 import * as BABYLON from "@babylonjs/core/";
 import "@babylonjs/inspector";
 import "@babylonjs/loaders/glTF/2.0";
@@ -50,8 +53,6 @@ class App {
       }
     });
 
-    // this.loadModels(this._scene);
-
     window.addEventListener("resize", () => {
       engine.resize();
     });
@@ -65,10 +66,10 @@ class App {
   private setupCamera(canvas: HTMLCanvasElement) {
     const camera: BABYLON.ArcRotateCamera = new BABYLON.ArcRotateCamera(
       "Camera",
-      Math.PI / 2,
-      Math.PI / 2,
-      3,
-      new BABYLON.Vector3(0, 0.7, 0),
+      -Math.PI / 2,
+      Math.PI / 4,
+      10,
+      new BABYLON.Vector3(0, 65, 0),
       this._scene,
     );
     camera.minZ = 0.01;
@@ -90,17 +91,15 @@ class App {
     light2.intensity = 2;
   }
 
-  private loadModels = async (scene: BABYLON.Scene) => {
-    const model = await BABYLON.ImportMeshAsync("/models/hills_v2.glb", scene);
-    model.meshes.forEach((mesh) => {
-      mesh.metadata = {
-        isTerrain: true,
-      };
-    });
-    console.log(model);
-  };
-
   private setupMaterials() {
+    // PBR materials need an environment texture for IBL; without it they render black
+    const envTexture = BABYLON.CubeTexture.CreateFromPrefilteredData(
+      "https://assets.babylonjs.com/environments/environmentSpecular.env",
+      this._scene,
+    );
+    this._scene.environmentTexture = envTexture;
+    this._scene.environmentIntensity = 1.0;
+
     MaterialLibrary.createAndRegisterMaterial(MaterialNames.Concrete, {
       diffuseTexture: "/textures/concrete.jpg",
       // normalTexture: "/textures/concrete_normal.jpg",
@@ -121,8 +120,9 @@ class App {
     });
 
     MaterialLibrary.createAndRegisterPBRMaterial(MaterialNames.Bluffs, {
-      albedoTexture: "/textures/bluffs/albedo_4K.jpg",
-      reflectivityTexture: "/textures/bluffs/specular_4K.jpg",
+      albedoTexture: "/textures/bluffs/albedo_4K.ktx2",
+      reflectivityTexture: "/textures/bluffs/specular_4K.ktx2",
+      ambientTexture: "/textures/bluffs/occlusion_4K.ktx2",
     });
   }
 }

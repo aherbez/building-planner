@@ -4,6 +4,9 @@ import { MaterialLibrary, MaterialNames } from "../geo/MaterialLibrary";
 
 const CHUNK_SIZE = [54.084177017211914, 51.02438735961914];
 
+const CLOUDFLARE_BUCKET_URL =
+  "https://pub-8ccc6a81589a4dffa880b41a3d3517ca.r2.dev";
+
 export class Terrain {
   constructor() {
     this.loadModels(SceneManager.mainScene);
@@ -16,7 +19,7 @@ export class Terrain {
   ) => {
     try {
       const model = await BABYLON.ImportMeshAsync(
-        `/models/chunks_v2/chunk_${x}_${z}.glb`,
+        `${CLOUDFLARE_BUCKET_URL}/chunks_v2/chunk_${x}_${z}.glb`,
         scene,
       );
       model.meshes.forEach((mesh) => {

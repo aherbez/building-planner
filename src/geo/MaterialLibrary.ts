@@ -1,4 +1,5 @@
 import * as BABYLON from "@babylonjs/core";
+import { SceneManager } from "../SceneManager";
 
 export enum MaterialNames {
   Concrete = "concrete",
@@ -35,6 +36,7 @@ export class MaterialLibrary {
   private _defaultMaterial: BABYLON.StandardMaterial;
 
   constructor() {
+    console.log("KTX2 decoder available:", !!BABYLON.KhronosTextureContainer2);
     this._defaultMaterial = new BABYLON.StandardMaterial("default", null);
     this._defaultMaterial.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.8);
     this._defaultMaterial.specularColor = new BABYLON.Color3(0.2, 0.2, 0.2);
@@ -62,11 +64,13 @@ export class MaterialLibrary {
     name: string,
     options: MaterialOptions,
   ): void {
-    // const mat = new BABYLON.PBRMaterial(name, null);
-    const mat = new BABYLON.StandardMaterial(name, null);
+    const mat = new BABYLON.StandardMaterial(name, SceneManager.mainScene);
 
     if (options.diffuseTexture) {
-      mat.diffuseTexture = new BABYLON.Texture(options.diffuseTexture, null);
+      mat.diffuseTexture = new BABYLON.Texture(
+        options.diffuseTexture,
+        SceneManager.mainScene,
+      );
     }
     if (options.diffuseColor) {
       mat.diffuseColor = options.diffuseColor ?? new BABYLON.Color3(1, 1, 1);
@@ -88,39 +92,38 @@ export class MaterialLibrary {
     name: string,
     options: PBRMaterialOptions,
   ): void {
-    const mat = new BABYLON.PBRMaterial(name, null);
-    // const mat = new BABYLON.StandardMaterial(name, null);
+    const mat = new BABYLON.PBRMaterial(name, SceneManager.mainScene);
+    mat.metallic = 0;
+    mat.roughness = 0.8;
 
     if (options.albedoTexture) {
-      mat.albedoTexture = new BABYLON.Texture(options.albedoTexture, null);
-    }
-    if (options.albedoColor) {
-      mat.albedoColor = options.albedoColor ?? new BABYLON.Color3(1, 1, 1);
-    }
-    if (options.reflectivityColor) {
-      mat.reflectivityColor = options.reflectivityColor;
+      const tex = new BABYLON.Texture(
+        options.albedoTexture,
+        SceneManager.mainScene,
+        {
+          invertY: false,
+        },
+      );
+      mat.albedoTexture = tex;
     }
     if (options.reflectivityTexture) {
       mat.reflectivityTexture = new BABYLON.Texture(
         options.reflectivityTexture,
-        null,
+        SceneManager.mainScene,
+        {
+          invertY: false,
+        },
       );
     }
     if (options.ambientTexture) {
-      mat.ambientTexture = new BABYLON.Texture(options.ambientTexture, null);
+      mat.ambientTexture = new BABYLON.Texture(
+        options.ambientTexture,
+        SceneManager.mainScene,
+        {
+          invertY: false,
+        },
+      );
     }
-    /*
-    if (options.specularColor) {
-      mat.specularIntensity= options.specularColor ?? new BABYLON.Color3(0, 0, 0);
-    }
-    if (options.emissiveColor) {
-      mat.emissiveColor = options.emissiveColor ?? new BABYLON.Color3(0, 0, 0);
-    }
-    if (options.ambientColor) {
-      mat.ambientColor = options.ambientColor ?? new BABYLON.Color3(0, 0, 0);
-    }
-    */
-
     MaterialLibrary.registerMaterial(name, mat);
   }
 

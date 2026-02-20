@@ -69,3 +69,7 @@ demo video: [https://www.youtube.com/watch?v=G6MWE91BcAs](https://www.youtube.co
 
 9:30-10:00: Setting up the project to load in all the chunks asyncronously
 [https://www.youtube.com/watch?v=dPKxEfyklqk](https://www.youtube.com/watch?v=dPKxEfyklqk)
+
+# 2026-02-18
+
+5:53pm: 
