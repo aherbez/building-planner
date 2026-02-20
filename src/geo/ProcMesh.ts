@@ -88,12 +88,6 @@ class ProcMesh {
 
     this._points = points;
     this._cleanPoints();
-    console.log("updating points");
-    console.group();
-    this._points.forEach((p) => console.log(p));
-    console.groupEnd();
-
-    console.log(this._points);
     this._generateMesh();
   }
 
@@ -110,7 +104,6 @@ class ProcMesh {
     );
     this._mesh.material = this._mat;
     this._mesh.position.y = this._yPos;
-    // console.log(this._mesh);
   }
 
   public get yPos(): number {

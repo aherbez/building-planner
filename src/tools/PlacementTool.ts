@@ -6,6 +6,7 @@ export class PlacementTool extends ToolBase {
   protected _markers: BABYLON.Mesh[] = [];
   protected _cursor: BABYLON.Mesh | null = null;
   protected _targetPoints: BABYLON.Vector3[] = [];
+  protected _maxPoints: number = Infinity;
 
   protected isValidTargetMesh(mesh: BABYLON.AbstractMesh): boolean {
     return true;
@@ -25,6 +26,13 @@ export class PlacementTool extends ToolBase {
     marker.material = MaterialLibrary.getMaterial(MaterialNames.Marker);
     marker.position = new BABYLON.Vector3(point.x, point.y + 25, point.z);
     this._markers.push(marker);
+
+    while (this._markers.length > this._maxPoints) {
+      const oldMarker = this._markers.shift();
+      if (oldMarker) {
+        oldMarker.dispose();
+      }
+    }
   }
 
   onPickEvent(event: BABYLON.PointerInfo, pickInfo: any): void {

@@ -74,6 +74,7 @@ class App {
     );
     camera.minZ = 0.01;
     camera.attachControl(canvas, true);
+    SceneManager.camera = camera;
   }
 
   private setupLights() {

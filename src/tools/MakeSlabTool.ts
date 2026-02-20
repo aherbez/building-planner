@@ -22,8 +22,6 @@ export class MakeSlabTool extends PlacementTool {
   }
 
   finializeTool() {
-    console.log("finalize slab tool", this._targetPoints);
-
     const slabMesh = new SlabMesh(this._targetPoints);
     this._toolManager.popTool();
   }

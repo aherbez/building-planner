@@ -9,6 +9,7 @@ export class SceneManager {
   private _engine: BABYLON.Engine;
   private _toolManager: ToolManager;
   private _controls: Controls;
+  private _camera: BABYLON.ArcRotateCamera;
 
   public static instance(): SceneManager {
     if (!SceneManager._instance) {
@@ -53,5 +54,13 @@ export class SceneManager {
 
   public static set controls(controls: Controls) {
     SceneManager.instance()._controls = controls;
+  }
+
+  public static get camera(): BABYLON.ArcRotateCamera {
+    return SceneManager.instance()._camera;
+  }
+
+  public static set camera(camera: BABYLON.ArcRotateCamera) {
+    SceneManager.instance()._camera = camera;
   }
 }

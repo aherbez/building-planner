@@ -85,3 +85,9 @@ demo video: [https://www.youtube.com/watch?v=G6MWE91BcAs](https://www.youtube.co
 
 - better positioning of the camera
 - loading chunks from the center (where the camera is looking) outwards
+
+7:49pm: Added a better way to move around the map, with a "Set Location" tool
+Pressing "c" (for camera) will invoke the tool, and clicking will move the camera
+to that location
+
+video: [https://www.youtube.com/watch?v=2ZTr2hNWeWQ](https://www.youtube.com/watch?v=2ZTr2hNWeWQ)

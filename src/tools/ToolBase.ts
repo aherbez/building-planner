@@ -7,6 +7,7 @@ export enum Tools {
   Select,
   Slab,
   Wall,
+  MoveCamera,
 }
 
 export const ToolNames = {
@@ -14,6 +15,7 @@ export const ToolNames = {
   [Tools.Select]: "Select",
   [Tools.Slab]: "Create Slab",
   [Tools.Wall]: "Create Wall",
+  [Tools.MoveCamera]: "Set Location",
 };
 
 export class ToolBase {

@@ -71,17 +71,11 @@ export class Controls {
 
     this._performanceDisplayDiv = new PerformanceDisplay();
     this._performanceDisplayDiv.addToDisplay(controlsDiv);
-    /*
-    this._performanceDisplayDiv = document.createElement("div");
-    this._performanceDisplayDiv.style.marginTop = "20px";
-    controlsDiv.appendChild(this._performanceDisplayDiv);
-    */
 
     this.updateActiveToolDisplay();
     this.updateToolInstructions();
 
     window.addEventListener(ToolEvents.ToolChanged, () => {
-      console.log("tool changed event received");
       this.updateActiveToolDisplay();
       this.updateToolInstructions();
     });

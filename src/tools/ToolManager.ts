@@ -3,6 +3,7 @@ import { MakeSlabTool } from "./MakeSlabTool";
 import { MakeWallTool } from "./MakeWallTool";
 import { Scene } from "@babylonjs/core/scene";
 import { SelectTool } from "./SelectTool";
+import { MoveCameraTool } from "./MoveCameraTool";
 
 import * as BABYLON from "@babylonjs/core/";
 import { SceneManager } from "../SceneManager";
@@ -26,6 +27,7 @@ export class ToolManager {
     this._tools.set(Tools.Slab, new MakeSlabTool(this));
     this._tools.set(Tools.Select, new SelectTool(this));
     this._tools.set(Tools.Wall, new MakeWallTool(this));
+    this._tools.set(Tools.MoveCamera, new MoveCameraTool(this));
 
     this.setTool(Tools.Select);
 
@@ -38,6 +40,9 @@ export class ToolManager {
       }
       if (event.key === "w") {
         this.setTool(Tools.Wall);
+      }
+      if (event.key === "c") {
+        this.setTool(Tools.MoveCamera);
       }
       if (event.key === "Backspace" || event.key === "Delete") {
         this.activeTool?.onBackspace();
@@ -100,19 +105,26 @@ export class ToolManager {
       return;
     }
 
+    this.activeTool?.onDeactivate();
+    this._toolStack.pop();
+    this.activeTool?.onActivate();
+
+    window.dispatchEvent(
+      new CustomEvent(ToolEvents.ToolChanged, {
+        detail: { toolKind: this.activeTool?.kind },
+      }),
+    );
+  }
+
+  public setTool(toolKind: Tools) {
     if (this.activeTool) {
       this.activeTool.onDeactivate();
     }
 
-    const previousTool = this._toolStack.pop();
-
-    this.activateTool(this.activeTool);
-  }
-
-  public setTool(toolKind: Tools) {
     const tool = this._tools.get(toolKind);
     if (tool) {
-      this.activateTool(tool);
+      tool.onActivate();
+      this._toolStack.push(tool);
       // emit tool changed event
       window.dispatchEvent(
         new CustomEvent(ToolEvents.ToolChanged, { detail: { toolKind } }),
@@ -122,6 +134,9 @@ export class ToolManager {
 
   public activateTool(tool?: ToolBase) {
     if (!tool) {
+      return;
+    }
+    if (tool.kind === this.activeTool?.kind) {
       return;
     }
 
@@ -136,7 +151,9 @@ export class ToolManager {
 
     // emit tool changed event
     window.dispatchEvent(
-      new CustomEvent(ToolEvents.ToolChanged, { detail: { tool } }),
+      new CustomEvent(ToolEvents.ToolChanged, {
+        detail: { toolKind: this.activeTool?.kind },
+      }),
     );
   }
 }

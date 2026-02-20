@@ -44,7 +44,7 @@ export class Terrain {
         mesh.material = MaterialLibrary.getMaterial(MaterialNames.Bluffs);
       });
     } catch (e) {
-      // console.log(`Failed to load chunk at ${x}, ${z}`, e);
+      console.log(`Failed to load chunk at ${x}, ${z}`);
     }
   };
 

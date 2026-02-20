@@ -36,7 +36,6 @@ export class MaterialLibrary {
   private _defaultMaterial: BABYLON.StandardMaterial;
 
   constructor() {
-    console.log("KTX2 decoder available:", !!BABYLON.KhronosTextureContainer2);
     this._defaultMaterial = new BABYLON.StandardMaterial("default", null);
     this._defaultMaterial.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.8);
     this._defaultMaterial.specularColor = new BABYLON.Color3(0.2, 0.2, 0.2);
