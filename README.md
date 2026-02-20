@@ -72,4 +72,11 @@ demo video: [https://www.youtube.com/watch?v=G6MWE91BcAs](https://www.youtube.co
 
 # 2026-02-18
 
-5:53pm: 
+![full_loading.png](/notes/images/full_loading.png)
+6:20pm: Lots of changes, namely:
+[https://www.youtube.com/watch?v=XM9vCeTPKqI](https://www.youtube.com/watch?v=XM9vCeTPKqI)
+
+- have all the chunks loading in sequence
+- chunks hosted on a CDN (cloudflare)
+- converted textures to KTX2 for both smaller size and better performance
+- added a FPS counter to track performance
