@@ -5,6 +5,7 @@ import * as BABYLON from "@babylonjs/core/";
 import "@babylonjs/inspector";
 import "@babylonjs/loaders/glTF/2.0";
 import "@babylonjs/core/Debug/debugLayer";
+import { SkyMaterial } from "@babylonjs/materials/sky";
 import { ToolManager } from "./tools/ToolManager";
 import { Controls } from "./controls/Controls";
 import { MaterialLibrary, MaterialNames } from "./geo/MaterialLibrary";
@@ -36,6 +37,7 @@ class App {
 
     this.setupCamera(canvas);
     this.setupLights();
+    this.setupSkybox();
     this.setupMaterials();
 
     window.addEventListener("keydown", (event) => {
@@ -90,6 +92,21 @@ class App {
       this._scene,
     );
     light2.intensity = 2;
+  }
+
+  private setupSkybox() {
+    // Sky material
+    var skyboxMaterial = new SkyMaterial("skyMaterial", this._scene);
+    skyboxMaterial.backFaceCulling = false;
+    skyboxMaterial.inclination = 0;
+
+    // Sky mesh (box)
+    const skyBox = BABYLON.MeshBuilder.CreateBox(
+      "skyBox",
+      { size: 1000.0 },
+      this._scene,
+    );
+    skyBox.material = skyboxMaterial;
   }
 
   private setupMaterials() {

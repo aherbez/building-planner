@@ -91,3 +91,6 @@ Pressing "c" (for camera) will invoke the tool, and clicking will move the camer
 to that location
 
 video: [https://www.youtube.com/watch?v=2ZTr2hNWeWQ](https://www.youtube.com/watch?v=2ZTr2hNWeWQ)
+
+8:12pm: Added a sky to make the environment a bit nicer
+![skybox.jpg](/notes/images/skybox.jpg)
