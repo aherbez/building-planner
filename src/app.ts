@@ -66,7 +66,7 @@ class App {
   private setupCamera(canvas: HTMLCanvasElement) {
     const camera: BABYLON.ArcRotateCamera = new BABYLON.ArcRotateCamera(
       "Camera",
-      -Math.PI / 2,
+      0,
       Math.PI / 4,
       10,
       new BABYLON.Vector3(25, 65, 0),

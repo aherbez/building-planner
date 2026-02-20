@@ -80,3 +80,8 @@ demo video: [https://www.youtube.com/watch?v=G6MWE91BcAs](https://www.youtube.co
 - chunks hosted on a CDN (cloudflare)
 - converted textures to KTX2 for both smaller size and better performance
 - added a FPS counter to track performance
+
+6:57pm: Changed the startup experience a bit
+
+- better positioning of the camera
+- loading chunks from the center (where the camera is looking) outwards
